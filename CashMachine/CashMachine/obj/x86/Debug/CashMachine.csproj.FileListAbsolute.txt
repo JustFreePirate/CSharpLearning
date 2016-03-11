@@ -1,0 +1,4 @@
+C:\Users\Дмитрий\Documents\Visual Studio 2010\Projects\CashMachine\CashMachine\bin\Debug\CashMachine.exe
+C:\Users\Дмитрий\Documents\Visual Studio 2010\Projects\CashMachine\CashMachine\bin\Debug\CashMachine.pdb
+C:\Users\Дмитрий\Documents\Visual Studio 2010\Projects\CashMachine\CashMachine\obj\x86\Debug\CashMachine.exe
+C:\Users\Дмитрий\Documents\Visual Studio 2010\Projects\CashMachine\CashMachine\obj\x86\Debug\CashMachine.pdb
