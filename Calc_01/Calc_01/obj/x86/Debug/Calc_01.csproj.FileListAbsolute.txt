@@ -1,0 +1,7 @@
+c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\bin\Debug\Calc_01.exe
+c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\bin\Debug\Calc_01.pdb
+c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.CalcForm.resources
+c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.Properties.Resources.resources
+c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.csproj.GenerateResource.Cache
+c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.exe
+c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.pdb
