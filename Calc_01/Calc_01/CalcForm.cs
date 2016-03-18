@@ -7,6 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+/* Идея в том, чтобы сделать строку для ввода и парсить лишь момент нажатия "="
+ * Если хоть в чем-то пользователь ошибся, то строку не меняем на экране и выводим сообщение об ошибке
+ * Если выражение корректно, то считаем его и выводим результат
+ * Одна строка для парсинга её и кидаем в парсер
+ * Парсер жует всю строку сразу и выдает ответ в виде числа или ошибки
+ * ошибки будем распознавать по исключениям
+ */
+
 namespace Calc_01
 {
     public partial class CalcForm : Form
@@ -19,326 +27,138 @@ namespace Calc_01
 
         private void CalcForm_Load(object sender, EventArgs e)
         {
-            opPressed = false;
-            button0_Click(null, null);
-            buttonPlus_Click(null, null);
+            
         }
 
-        //как только нажимается клавиша, если был нажат оператор, то currentNum = num
-        // если не был нажат оператор то currentNum *= 10, +num
+
+        private void updateTextBox() {
+            textBox.Text = currentExpression;
+        }
+
+
+        //Buttons
         private void button1_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 1;
+            currentExpression += "1";
             updateTextBox();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 2;
+            currentExpression += "2";
             updateTextBox();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 3;
+            currentExpression += "3";
             updateTextBox();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 4;
+            currentExpression += "4";
             updateTextBox();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 5;
+            currentExpression += "5";
             updateTextBox();
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 6;
+            currentExpression += "6";
             updateTextBox();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 7;
-            updateTextBox();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 8;
-            updateTextBox();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
-            currentNumber += 9;
+            currentExpression += "7";
             updateTextBox();
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
-            if (opPressed)
-            {
-                opPressed = false;
-                currentNumber = 0;
-            }
-            currentNumber *= 10;
+            currentExpression += "0";
             updateTextBox();
-        }
-
-
-
-        //Операторы -- >
-
-        //как только нажимается оператор, он сразу пушатся в парсер вместе с числом, 
-        //но его можно заменить, если нажать после на другой.
-        private void buttonMult_Click(object sender, EventArgs e)
-        {
-            if (!opPressed)
-            {
-                parser.addNum(currentNumber);
-                parser.addOp('*');
-            }
-            else if (!lastOp.Equals('('))
-            {
-                parser.changeTopOp('*');
-            }
-            opPressed = true;
-            currentNumber = parser.getTop();
-            updateTextBox();
-            lastOp = '*';
-        }
-
-        private void buttonDiv_Click(object sender, EventArgs e)
-        {
-            if (!opPressed)
-            {
-                parser.addNum(currentNumber);
-                parser.addOp('/');
-            }
-            else if (!lastOp.Equals('('))
-            {
-                parser.changeTopOp('/');
-            }
-            currentNumber = parser.getTop();
-            opPressed = true;
-            updateTextBox();
-            lastOp = '/';
-        }
-
-        private void buttonPlus_Click(object sender, EventArgs e)
-        {
-            if (!opPressed)
-            {
-                parser.addNum(currentNumber);
-                parser.addOp('+');
-            }
-            else if (!lastOp.Equals('(') )
-            {
-                parser.changeTopOp('+');
-            }
-            currentNumber = parser.getTop();
-            opPressed = true;
-            updateTextBox();
-            lastOp = '+';
         }
 
         private void buttonMinus_Click(object sender, EventArgs e)
         {
-            if (!opPressed)
-            {
-                parser.addNum(currentNumber);
-                parser.addOp('-');
-            }
-            else if (!lastOp.Equals('(')) //если последний оператор - левая скобка, то его уже нельзя изменить
-            {
-                parser.changeTopOp('-');
-            }
-            opPressed = true;
-            currentNumber = parser.getTop();
+            currentExpression += "-";
             updateTextBox();
-            lastOp = '-';
         }
 
-
-
-        private void buttonEqual_Click(object sender, EventArgs e)
+        private void buttonPlus_Click(object sender, EventArgs e)
         {
-            if (opPressed && !lastOp.Equals(')') && !lastOp.Equals('=')) //были нажаты +-*/(
-            {
-                parser.popTopOp(); //снять с верхушки уже добавленный оператор
-            }
-            if (!opPressed && !lastOp.Equals('='))
-            {
-                parser.addNum(currentNumber);
-            }
-            parser.calculate();
-            currentNumber = parser.getTop();
-            lastOp = '=';
-            opPressed = true;
+            currentExpression += "+";
+            updateTextBox();
+        }
+
+        private void buttonMult_Click(object sender, EventArgs e)
+        {
+            currentExpression += "*";
+            updateTextBox();
+        }
+
+        private void buttonDiv_Click(object sender, EventArgs e)
+        {
+            currentExpression += "/";
+            updateTextBox();
+        }
+
+        private void buttonLeftBracket_Click(object sender, EventArgs e)
+        {
+            currentExpression += "(";
             updateTextBox();
         }
 
         private void buttonRightBracket_Click(object sender, EventArgs e)
         {
-            if (countLeftBrackets > 0)
-            {
-                if (opPressed)
-                {
-                    if (!lastOp.Equals(')') && !lastOp.Equals('(')) //было нажато +-*/
-                    {
-                        parser.popTopOp(); //снимаем их
-                    }
-                }
-                else
-                {
-                    parser.addNum(currentNumber);
-                }
-                parser.addOp(')');
-                countLeftBrackets--;
-                lastOp = ')';
-                
-                
-                opPressed = true;
-                currentNumber = parser.getTop();
-                updateTextBox();
-            }
+            currentExpression += ")";
+            updateTextBox();
         }
-        //левая скобка уже не меняется на другой оператор
-        private void buttonLeftBracket_Click(object sender, EventArgs e)
-        {
-            if (opPressed)
-            {
-                parser.addOp('(');
-                currentNumber = parser.getTop();
-                updateTextBox();
-                lastOp = '(';
-                countLeftBrackets++;
-            }
 
+        private void buttonDel_Click(object sender, EventArgs e)
+        {
+            if (currentExpression.Length > 0)
+            {
+                currentExpression = currentExpression.Substring(0, currentExpression.Length - 1);
+            }
+            updateTextBox();
         }
 
         private void buttonC_Click(object sender, EventArgs e)
         {
-            parser.clear();
-            currentNumber = 0;
-            opPressed = false;
-            buttonPlus_Click(null, null); //0 + ...
+            currentExpression = "";
             updateTextBox();
         }
 
-        private void buttonDel_Click(object sender, EventArgs e) //del last symbol
+        private void buttonEqual_Click(object sender, EventArgs e)
         {
-            if (!opPressed)
+            
+            Int64 ans;
+            Parser parser = new Parser();
+            try
             {
-                currentNumber /= 10;
-                updateTextBox();
+                if (currentExpression.Length > 0)
+                {
+                    ans = parser.evaluate(currentExpression);
+                }
+                else ans = 0;
+                currentExpression = Convert.ToString(ans);
+                textBox1.Text = "";
+            } catch (Exception except) {
+                //syntax error
+                textBox1.Text = except.Message;
             }
+            updateTextBox();
         }
 
+        
 
-
-
-
-        private void radioButtonOct_CheckedChanged(object sender, EventArgs e)
-        {
-            button8.Enabled = false; //there are no buttons 8 and 9 in oct
-            button9.Enabled = false;
-        }
-
-        private void radioButtonDec_CheckedChanged(object sender, EventArgs e)
-        {
-            button8.Enabled = true; //there are buttons 8 and 9 in dec
-            button9.Enabled = true;
-        }
-
-
-
-        private void updateTextBox()
-        {
-            textBox.Text = currentNumber.ToString();
-            char[] ops = parser.getOps();
-            Array.Reverse(ops);
-            Int64[] nums = parser.getNums();
-            Array.Reverse(nums);
-            textBox1.Text = string.Join(",", nums);
-            textBox2.Text = string.Join(",", ops);
-        }
-
-
-
-
-        private bool opPressed = false;
-        private char lastOp;
-        private Int64 currentNumber = 0;
-        private Parser parser = new Parser();
-        private int countLeftBrackets = 0;
-
-
-
-        //как только нажимается оператор, он сразу пушатся в парсер вместе с числом, но его можно заменить, если нажать после на другой.
-        //как только нажимается клавиша, если был нажат оператор, то currentNum = num
-        // если не был нажат оператор то currentNum *= 10, +num
-        //если нажали равно, и оператор был нажат, то последний оператор не считается
-        //если нажали равно и оператор не был нажат, то просто считаем значение выражения
+        private string currentExpression;
     }
 }

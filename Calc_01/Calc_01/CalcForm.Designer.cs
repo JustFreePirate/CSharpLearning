@@ -36,9 +36,6 @@
             this.textBox = new System.Windows.Forms.TextBox();
             this.buttonC = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
-            this.radioButtonOct = new System.Windows.Forms.RadioButton();
-            this.radioButtonDec = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -49,19 +46,15 @@
             this.button0 = new System.Windows.Forms.Button();
             this.buttonRightBracket = new System.Windows.Forms.Button();
             this.buttonLeftBracket = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonMinus
             // 
             this.buttonMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonMinus.Location = new System.Drawing.Point(189, 164);
+            this.buttonMinus.Location = new System.Drawing.Point(189, 167);
             this.buttonMinus.Name = "buttonMinus";
             this.buttonMinus.Size = new System.Drawing.Size(40, 40);
             this.buttonMinus.TabIndex = 9;
@@ -72,7 +65,7 @@
             // buttonPlus
             // 
             this.buttonPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPlus.Location = new System.Drawing.Point(235, 164);
+            this.buttonPlus.Location = new System.Drawing.Point(235, 167);
             this.buttonPlus.Name = "buttonPlus";
             this.buttonPlus.Size = new System.Drawing.Size(40, 40);
             this.buttonPlus.TabIndex = 10;
@@ -83,7 +76,7 @@
             // buttonMult
             // 
             this.buttonMult.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonMult.Location = new System.Drawing.Point(189, 210);
+            this.buttonMult.Location = new System.Drawing.Point(189, 213);
             this.buttonMult.Name = "buttonMult";
             this.buttonMult.Size = new System.Drawing.Size(40, 40);
             this.buttonMult.TabIndex = 11;
@@ -94,7 +87,7 @@
             // buttonDiv
             // 
             this.buttonDiv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDiv.Location = new System.Drawing.Point(235, 210);
+            this.buttonDiv.Location = new System.Drawing.Point(235, 213);
             this.buttonDiv.Name = "buttonDiv";
             this.buttonDiv.Size = new System.Drawing.Size(40, 40);
             this.buttonDiv.TabIndex = 12;
@@ -105,7 +98,7 @@
             // buttonEqual
             // 
             this.buttonEqual.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.buttonEqual.Location = new System.Drawing.Point(189, 256);
+            this.buttonEqual.Location = new System.Drawing.Point(189, 259);
             this.buttonEqual.Name = "buttonEqual";
             this.buttonEqual.Size = new System.Drawing.Size(84, 40);
             this.buttonEqual.TabIndex = 13;
@@ -123,12 +116,11 @@
             this.textBox.ReadOnly = true;
             this.textBox.Size = new System.Drawing.Size(252, 31);
             this.textBox.TabIndex = 14;
-            this.textBox.Text = "0";
             this.textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // buttonC
             // 
-            this.buttonC.Location = new System.Drawing.Point(189, 114);
+            this.buttonC.Location = new System.Drawing.Point(189, 116);
             this.buttonC.Name = "buttonC";
             this.buttonC.Size = new System.Drawing.Size(40, 40);
             this.buttonC.TabIndex = 16;
@@ -138,47 +130,13 @@
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(235, 114);
+            this.buttonDel.Location = new System.Drawing.Point(235, 116);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(40, 40);
             this.buttonDel.TabIndex = 17;
             this.buttonDel.Text = "<-";
             this.buttonDel.UseVisualStyleBackColor = true;
             this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
-            // 
-            // radioButtonOct
-            // 
-            this.radioButtonOct.AutoSize = true;
-            this.radioButtonOct.Location = new System.Drawing.Point(3, 9);
-            this.radioButtonOct.Name = "radioButtonOct";
-            this.radioButtonOct.Size = new System.Drawing.Size(40, 17);
-            this.radioButtonOct.TabIndex = 22;
-            this.radioButtonOct.Text = "oct";
-            this.radioButtonOct.UseVisualStyleBackColor = true;
-            this.radioButtonOct.CheckedChanged += new System.EventHandler(this.radioButtonOct_CheckedChanged);
-            // 
-            // radioButtonDec
-            // 
-            this.radioButtonDec.AutoSize = true;
-            this.radioButtonDec.Checked = true;
-            this.radioButtonDec.Location = new System.Drawing.Point(3, 32);
-            this.radioButtonDec.Name = "radioButtonDec";
-            this.radioButtonDec.Size = new System.Drawing.Size(43, 17);
-            this.radioButtonDec.TabIndex = 23;
-            this.radioButtonDec.TabStop = true;
-            this.radioButtonDec.Text = "dec";
-            this.radioButtonDec.UseVisualStyleBackColor = true;
-            this.radioButtonDec.CheckedChanged += new System.EventHandler(this.radioButtonDec_CheckedChanged);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radioButtonDec);
-            this.groupBox1.Controls.Add(this.radioButtonOct);
-            this.groupBox1.Location = new System.Drawing.Point(21, 55);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(47, 54);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
             // 
             // button2
             // 
@@ -252,7 +210,7 @@
             // 
             // button0
             // 
-            this.button0.Location = new System.Drawing.Point(18, 195);
+            this.button0.Location = new System.Drawing.Point(64, 149);
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(86, 40);
             this.button0.TabIndex = 15;
@@ -280,33 +238,8 @@
             this.buttonLeftBracket.UseVisualStyleBackColor = true;
             this.buttonLeftBracket.Click += new System.EventHandler(this.buttonLeftBracket_Click);
             // 
-            // button8
-            // 
-            this.button8.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.button8.CausesValidation = false;
-            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button8.Location = new System.Drawing.Point(64, 149);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(40, 40);
-            this.button8.TabIndex = 20;
-            this.button8.Text = "8";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(110, 149);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(40, 40);
-            this.button9.TabIndex = 21;
-            this.button9.Text = "9";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button9);
-            this.panel1.Controls.Add(this.button8);
             this.panel1.Controls.Add(this.buttonLeftBracket);
             this.panel1.Controls.Add(this.buttonRightBracket);
             this.panel1.Controls.Add(this.button0);
@@ -324,17 +257,13 @@
             // 
             // textBox1
             // 
+            this.textBox1.BackColor = System.Drawing.SystemColors.Menu;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Location = new System.Drawing.Point(122, 55);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 20);
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(151, 13);
             this.textBox1.TabIndex = 26;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(122, 82);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(151, 20);
-            this.textBox2.TabIndex = 27;
             // 
             // CalcForm
             // 
@@ -342,10 +271,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(297, 363);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonC);
             this.Controls.Add(this.textBox);
@@ -358,8 +285,6 @@
             this.Name = "CalcForm";
             this.Text = "Calc 8-10";
             this.Load += new System.EventHandler(this.CalcForm_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -376,9 +301,6 @@
         private System.Windows.Forms.TextBox textBox;
         private System.Windows.Forms.Button buttonC;
         private System.Windows.Forms.Button buttonDel;
-        private System.Windows.Forms.RadioButton radioButtonOct;
-        private System.Windows.Forms.RadioButton radioButtonDec;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
@@ -389,11 +311,8 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button buttonRightBracket;
         private System.Windows.Forms.Button buttonLeftBracket;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
 
     }
 }

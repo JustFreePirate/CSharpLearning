@@ -5,3 +5,4 @@ c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\ob
 c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.csproj.GenerateResource.Cache
 c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.exe
 c:\users\дмитрий\documents\visual studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.pdb
+C:\Users\Дмитрий\Documents\Visual Studio 2010\Projects\Calc_01\Calc_01\obj\x86\Debug\Calc_01.csprojResolveAssemblyReference.cache

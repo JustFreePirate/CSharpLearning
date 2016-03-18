@@ -17,10 +17,17 @@ namespace Calc_01
                 if (op.Equals(')'))
                 {
                     char OP;
-                    while (!(OP = opStack.Pop()).Equals('(')) //пока не встретим (
+                    try
                     {
-                        //применим оператор OP к двум последним элементам на стеке
-                        useOp(OP);
+                        while (!(OP = opStack.Pop()).Equals('(')) //пока не встретим (
+                        {
+                            //применим оператор OP к двум последним элементам на стеке
+                            useOp(OP);
+                        }
+                    }
+                    catch (InvalidOperationException e)
+                    {
+                        throw new Exception("скобки не согласованы");
                     }
                 }
                 else //op \in {+,-,*,\}
@@ -42,10 +49,12 @@ namespace Calc_01
             {
                 case '(':
                     return 0;
-                case '+': case '-':
+                case '+': case '-': 
                     return 1;
-                case '*': case '/':
+                case '*': case '/': 
                     return 2;
+                case UNARY_MINUS:
+                    return 3;
                 default:
                     throw new Exception("in get Priority wrong input");
             }
@@ -53,25 +62,36 @@ namespace Calc_01
 
         private void useOp(char op)
         {
-            switch (op)
+            try
             {
-                case '+':
-                    numStack.Push(numStack.Pop() + numStack.Pop());
-                    break;
-                case '-':
-                    numStack.Push(-numStack.Pop() + numStack.Pop());
-                    break;
-                case '*':
-                    numStack.Push(numStack.Pop() * numStack.Pop());
-                    break;
-                case '/':
-                    Int64 a = numStack.Pop();
-                    Int64 b = numStack.Pop();
-                    numStack.Push(b / a);
-                    break;
-                case '(': //skip (, может произойти если пользователь забыл закрывающие скобки 
-                    break;
+                switch (op)
+                {
+                    case '+':
+                        numStack.Push(numStack.Pop() + numStack.Pop());
+                        break;
+                    case '-':
+                        numStack.Push(-numStack.Pop() + numStack.Pop());
+                        break;
+                    case UNARY_MINUS:
+                        numStack.Push(-numStack.Pop());
+                        break;
+                    case '*':
+                        numStack.Push(numStack.Pop() * numStack.Pop());
+                        break;
+                    case '/':
+                        Int64 a = numStack.Pop();
+                        Int64 b = numStack.Pop();
+                        numStack.Push(b / a);
+                        break;
+                    default:
+                        throw new Exception("несогласованные скобки");
+                }
             }
+            catch (Exception e)
+            {
+                throw new Exception("Syntax error");
+            }
+
         }
 
         public void addNum(Int64 num)
@@ -79,58 +99,110 @@ namespace Calc_01
             numStack.Push(num);
         }
 
-        public Int64 getTop()
+        
+        public Int64 evaluate(string expr)
         {
-            if (numStack.Count == 0 || opStack.Count != 0 && opStack.Peek().Equals('('))
-            {
-                return 0;
-            }
-            else
-            {
-                return numStack.Peek();
-            }
-        }
-
-        public void changeTopOp(char op)
-        {
-            while (opStack.Peek().Equals('('))
-            {
-                opStack.Pop();
-            }
-            opStack.Pop();
-            opStack.Push(op);
-        }
-
-        public void popTopOp()
-        {
-            opStack.Pop();
-        }
-
-        public void calculate()
-        {
-            while (opStack.Count != 0)
+            parseExpr(expr);
+            while (opStack.Count > 0)
             {
                 useOp(opStack.Pop());
             }
+            if (numStack.Count > 1)
+            {
+                throw new Exception("syntax error");
+            }
+            return numStack.Peek();
+            //return Converter.from10to8(numStack.Peek());
         }
 
-        public void clear()
+        private void parseExpr(string expr)
         {
-            numStack.Clear();
-            opStack.Clear();
+            int pos = 0;
+            int len = expr.Length;
+            char prevOp = '(';
+            bool prevIsOp = true;
+            while (pos < len) //пока есть символы
+            {
+                string token = readToken(expr, pos);
+                //token = оператор или число
+                
+                if (isNumber(token))
+                {
+                    addNum(Convert.ToInt64(token, 10));
+                    prevIsOp = false;
+                }
+                else //operator
+                {
+                    if (prevIsOp && prevOp != ')')
+                    {
+                        //в этом случае унарный оператор (оператор после другого оператора)
+                        //или скобки
+                        char Op = Convert.ToChar(token);
+                        if (Op == '-')
+                        {
+                            addOp(UNARY_MINUS);
+                            prevOp = UNARY_MINUS;
+                        } else if (Op == '*' || Op == '\\') //унарное деление и умножение под запретом
+                        {
+                            throw new Exception("неверный унарный оператор");
+                        }
+                        if (Op == '(' || Op == ')')
+                        {
+                            addOp(Op);
+                            prevOp = Op;
+                        }
+                        prevIsOp = true;
+                    }
+                    else
+                    {
+                        prevOp = Convert.ToChar(token);
+                        addOp(prevOp);
+                        prevIsOp = true;
+                    }
+                }
+                pos += token.Length;
+            }
+            if (prevIsOp && prevOp != ')')
+            {
+                throw new Exception("Syntax error");
+            }
         }
 
-        public char[] getOps()
+        private bool isNumber(string token)
         {
-            return opStack.ToArray();
+            try
+            {
+                Convert.ToInt64(token);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
-        public Int64[] getNums()
+
+        private string readToken(string expr, int pos)
         {
-            return numStack.ToArray();
+            if (isNumber(expr[pos].ToString()))
+            {
+                //считываем число
+                int len = 1;
+                while ((pos+len) < expr.Length && isNumber(expr[pos + len].ToString()))
+                {
+                    len++;
+                }
+                return expr.Substring(pos, len);
+            }
+            else //если оператор
+            {
+                return expr[pos].ToString();
+            }
         }
+
 
         private Stack<Int64> numStack = new Stack<Int64>();
         private Stack<char> opStack = new Stack<char>();
+        const char UNARY_MINUS = '#'; //отдельное обозначение для унарных операторов
     }
 }
